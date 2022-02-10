@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Http\Controllers\Admin\User;
+
+use App\Http\Controllers\Controller;
+
+class CreateController extends Controller
+{
+    public function run()
+    {
+        return view('admin.users.edit', [
+            'item' => null,
+        ]);
+    }
+}

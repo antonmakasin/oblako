@@ -1,10 +1,8 @@
 export PATH_ROOT=$PWD
+export OBLAKO=$PWD/oblako
 
 echo ">entering dir $PATH_ROOT"
 cd $PATH_ROOT || { echo '!cd failed' ; exit 1; }
-
-echo ">composer install"
-git clone git@bitbucket.org:antonmakasin/oblako.git
 
 echo ">composer install"
 /opt/php80/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -13,10 +11,11 @@ echo ">composer install"
 /opt/php80/bin/php -r "unlink('composer-setup.php');"
 
 echo ">oblako install"
-/opt/php80/bin/php composer.phar install --no-interaction --optimize-autoloader --no-dev
-
-echo ">key generate"
-/opt/php80/bin/php artisan key:generate
+rm -Rf $PATH_ROOT/public
+/opt/php80/bin/php composer.phar create-project --no-interaction --no-dev antonmakasin/oblako
+mv -vf $OBLAKO/* $PATH_ROOT
+mv -vf $OBLAKO/.* $PATH_ROOT
+rm -Rf $OBLAKO
 
 echo ">link storage"
 /opt/php80/bin/php artisan storage:link
@@ -31,6 +30,13 @@ echo ">basic commands run"
 /opt/php80/bin/php artisan basic_commands:run
 
 echo ">create admin"
-/opt/php80/bin/php artisan db:seed --class=AdminSeeder
+/opt/php80/bin/php artisan db:seed --class=AdminSeeder --force
+
+echo "Please enter Site url (example, https://makasin.ru):"
+read SITE_LINK
+/opt/php80/bin/php artisan env:set app_url $SITE_LINK
+
+echo ">artisan optimize"
+/opt/php80/bin/php artisan optimize
 
 exit

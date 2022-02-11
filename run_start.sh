@@ -29,12 +29,24 @@ echo ">artisan migrate"
 echo ">basic commands run"
 /opt/php80/bin/php artisan basic_commands:run
 
-echo ">create admin"
-/opt/php80/bin/php artisan db:seed --class=AdminSeeder --force
+echo "Please enter admin email for dashboard:"
+read ADMIN_EMAIL
+/opt/php80/bin/php artisan env:set admin_email $ADMIN_EMAIL
+
+echo "Please enter admin password for dashboard:"
+read ADMIN_PASSWORD
+/opt/php80/bin/php artisan env:set admin_password $ADMIN_PASSWORD
+
+echo "Please enter token for file uploads:"
+read ADMIN_TOKEN
+/opt/php80/bin/php artisan env:set admin_token $ADMIN_TOKEN
 
 echo "Please enter Site url (example, https://makasin.ru):"
 read SITE_LINK
 /opt/php80/bin/php artisan env:set app_url $SITE_LINK
+
+echo ">create admin"
+/opt/php80/bin/php artisan db:seed --class=AdminSeeder --force
 
 echo ">artisan optimize"
 /opt/php80/bin/php artisan optimize

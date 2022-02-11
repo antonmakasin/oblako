@@ -10,9 +10,12 @@
 ## Dashboard
 
 - /auth/login
-- Login and password: ADMIN_EMAIL & ADMIN_PASSWORD (watch .env in the project root)
-- !!! CHANGE login and password in dashboard after log in !!!
-- !!! CHANGE ADMIN_TOKEN in .env !!!
+- If you forgot the authorization data (entered during installation), it`s in .env at the project`s root (ADMIN_EMAIL and ADMIN_PASSWORD)
+
+
+## Token for the file uploading
+- If you forgot the token, it`s in .env at the project`s root (ADMIN_TOKEN)
+- If you want change the token, you have to change ADMIN_TOKEN in .env and then run in console "php artisan optimize". I plan make the token refresh option through the dashboard later.
 
 
 ## Settings

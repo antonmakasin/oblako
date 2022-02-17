@@ -1,5 +1,6 @@
 ## Start
 
+- Public domain folder mast be setted as "public". For example: domain.com/public 
 - Make all actions with User, that run web server. It doesn't have to be a root 
 - Copy "run_start.sh" to the project root
 - If PHP installed as main, change all "/opt/php80/bin/php" to "php" 
